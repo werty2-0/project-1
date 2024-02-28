@@ -1,8 +1,7 @@
-Script started on 2024-02-28 03:13:44+00:00 [TERM="xterm-256color" TTY="/dev/pts/1" COLUMNS="94" LINES="51"]
+Script started on 2024-02-28 03:27:13+00:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="94" LINES="51"]
 [?2004h]0;asampath3@my-cs400-vm: ~/P105.RoleCode[01;32masampath3@my-cs400-vm[00m:[01;34m~/P105.RoleCode[00m$ git status
 [?2004lOn branch frontend
-Your branch is ahead of 'origin/frontend' by 2 commits.
-  (use "git push" to publish your local commits)
+Your branch is up to date with 'origin/frontend'.
 
 Changes not staged for commit:
   (use "git add <file>..." to update what will be committed)
@@ -10,12 +9,12 @@ Changes not staged for commit:
 	[31mmodified:   log[m
 
 no changes added to commit (use "git add" and/or "git commit -a")
-[?2004h]0;asampath3@my-cs400-vm: ~/P105.RoleCode[01;32masampath3@my-cs400-vm[00m:[01;34m~/P105.RoleCode[00m$ git log -1
-[?2004l[?1h=[33mcommit c1006133c93ac8150ac9d063d2e945c1baa92b6e[m[33m ([m[1;36mHEAD -> [m[1;32mfrontend[m[33m)[m[m
+[?2004h]0;asampath3@my-cs400-vm: ~/P105.RoleCode[01;32masampath3@my-cs400-vm[00m:[01;34m~/P105.RoleCode[00m$ git log-[K -1
+[?2004l[?1h=[33mcommit e8ec86287c2f732e0747744d2d6be11e062afab7[m[33m ([m[1;36mHEAD -> [m[1;32mfrontend[m[33m, [m[1;31morigin/frontend[m[33m)[m[m
 Author: AJA SAMPATH <asampath3@wisc.edu>[m
-Date:   Wed Feb 28 03:13:39 2024 +0000[m
+Date:   Wed Feb 28 03:14:29 2024 +0000[m
 [m
-    fixed makefile[m
+    updated log file[m
 [K[?1l>[?2004h]0;asampath3@my-cs400-vm: ~/P105.RoleCode[01;32masampath3@my-cs400-vm[00m:[01;34m~/P105.RoleCode[00m$ make clean
 [?2004lfind . -type f -name "*.class" -delete
 [?2004h]0;asampath3@my-cs400-vm: ~/P105.RoleCode[01;32masampath3@my-cs400-vm[00m:[01;34m~/P105.RoleCode[00m$ ls
@@ -42,7 +41,7 @@ Thanks for using JUnit! Support its development at https://junit.org/sponsoring
 [36m├─[0m [36mJUnit Vintage[0m [32m✔[0m
 [36m└─[0m [36mJUnit Platform Suite[0m [32m✔[0m
 
-Test run finished after 179 ms
+Test run finished after 169 ms
 [         4 containers found      ]
 [         0 containers skipped    ]
 [         4 containers started    ]
@@ -59,4 +58,4 @@ Test run finished after 179 ms
 [?2004h]0;asampath3@my-cs400-vm: ~/P105.RoleCode[01;32masampath3@my-cs400-vm[00m:[01;34m~/P105.RoleCode[00m$ exit
 [?2004lexit
 
-Script done on 2024-02-28 03:14:07+00:00 [COMMAND_EXIT_CODE="0"]
+Script done on 2024-02-28 03:27:32+00:00 [COMMAND_EXIT_CODE="0"]
