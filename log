@@ -1,20 +1,21 @@
-Script started on 2024-02-28 03:11:38+00:00 [TERM="xterm-256color" TTY="/dev/pts/1" COLUMNS="94" LINES="51"]
+Script started on 2024-02-28 03:13:44+00:00 [TERM="xterm-256color" TTY="/dev/pts/1" COLUMNS="94" LINES="51"]
 [?2004h]0;asampath3@my-cs400-vm: ~/P105.RoleCode[01;32masampath3@my-cs400-vm[00m:[01;34m~/P105.RoleCode[00m$ git status
 [?2004lOn branch frontend
-Your branch is ahead of 'origin/frontend' by 1 commit.
+Your branch is ahead of 'origin/frontend' by 2 commits.
   (use "git push" to publish your local commits)
 
-Untracked files:
-  (use "git add <file>..." to include in what will be committed)
-	[31mlog[m
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	[31mmodified:   log[m
 
-nothing added to commit but untracked files present (use "git add" to track)
+no changes added to commit (use "git add" and/or "git commit -a")
 [?2004h]0;asampath3@my-cs400-vm: ~/P105.RoleCode[01;32masampath3@my-cs400-vm[00m:[01;34m~/P105.RoleCode[00m$ git log -1
-[?2004l[?1h=[33mcommit abce35c1a379e7fcf8dc190502e61225e7de6b30[m[33m ([m[1;36mHEAD -> [m[1;32mfrontend[m[33m)[m[m
+[?2004l[?1h=[33mcommit c1006133c93ac8150ac9d063d2e945c1baa92b6e[m[33m ([m[1;36mHEAD -> [m[1;32mfrontend[m[33m)[m[m
 Author: AJA SAMPATH <asampath3@wisc.edu>[m
-Date:   Wed Feb 28 03:11:25 2024 +0000[m
+Date:   Wed Feb 28 03:13:39 2024 +0000[m
 [m
-    Frontend tests[m
+    fixed makefile[m
 [K[?1l>[?2004h]0;asampath3@my-cs400-vm: ~/P105.RoleCode[01;32masampath3@my-cs400-vm[00m:[01;34m~/P105.RoleCode[00m$ make clean
 [?2004lfind . -type f -name "*.class" -delete
 [?2004h]0;asampath3@my-cs400-vm: ~/P105.RoleCode[01;32masampath3@my-cs400-vm[00m:[01;34m~/P105.RoleCode[00m$ ls
@@ -23,10 +24,7 @@ BackendInterface.java        FrontendPlaceholder.java       SortedCollectionInte
 BackendPlaceholder.java      ISCPlaceholder.java            TextUITester.java
 Frontend.java                IterableSortedCollection.java  log
 FrontendDeveloperTests.java  Makefile                       songs.csv
-[?2004h]0;asampath3@my-cs400-vm: ~/P105.RoleCode[01;32masampath3@my-cs400-vm[00m:[01;34m~/P105.RoleCode[00m$ run [K[K[K[Kmake runFDTests 
-[?2004lmake: *** No rule to make target 'FrontendDeveloperTests.class', needed by 'runFDTests'.  Stop.
-[?2004h]0;asampath3@my-cs400-vm: ~/P105.RoleCode[01;32masampath3@my-cs400-vm[00m:[01;34m~/P105.RoleCode[00m$ make [K[K[K[K[Kmake [K[K[K[K[Knam[Kno Makefile 
-[?2004l[?2004h[?1049h[22;0;0t[1;51r(B[m[4l[?7h[39;49m[?1h=[?1h=[?25l[39;49m(B[m[H[2J[49;41H(B[0;7m[ Reading... ](B[m[49;40H(B[0;7m[ Read 8 lines ](B[m[H(B[0;7m  GNU nano 6.2                               Makefile                                         [1;93H(B[m[50d(B[0;7m^G(B[m Help[50;16H(B[0;7m^O(B[m Write Out   (B[0;7m^W(B[m Where Is    (B[0;7m^K(B[m Cut[50;61H(B[0;7m^T(B[m Execute     (B[0;7m^C(B[m Location[51d(B[0;7m^X(B[m Exit[51;16H(B[0;7m^R(B[m Read File   (B[0;7m^\(B[m Replace     (B[0;7m^U(B[m Paste[61G(B[0;7m^J(B[m Justify     (B[0;7m^/(B[m Go To Line[2d(B[0;1m[34mFrontend.class:[39m(B[m Frontend.java[3;9Hjavac Frontend.java[4d(B[0;1m[34mcompileFDTest:[39m(B[m FrontendDeveloperTests.java[5;9Hjavac -cp ../junit5.jar:. FrontendDeveloperTests.java[6d(B[0;1m[34mrunFDTests:[39m(B[m FrontendDeveloperTests.class Frontend.class[7;9Hjava -jar ../junit5.jar -cp . -c FrontendDeveloperTests[8d(B[0;1m[34mclean:[9;9H[39m(B[mfind . -type f -name "*.class" -delete[2d[?12l[?25h[?25l[?12l[?25h[3d[?25l[?12l[?25h[4d[?25l[?12l[?25h[5d[?25l[?12l[?25h[6d[?25l[?12l[?25h[7d[?25l[?12l[?25h[8d[?25l[?12l[?25h[C[?25l[?12l[?25h[A[?25l[?12l[?25h[7;9H[?25l[?12l[?25hj[?25l[?12l[?25ha[?25l[?12l[?25hv[?25l[?12l[?25ha[?25l[?12l[?25h[A[?25l[?12l[?25hF[?25l[?12l[?25hr[?25l[?12l[?25ho[?25l[?12l[?25hn[?25l[?12l[?25ht[?25l[49d[K[?12l[?25h[6;19H[?25l[?12l[?25hn[?25l[?12l[?25hd[?25l[?12l[?25hD[?25l[?12l[?25he[?25l[?12l[?25hv[?25l[?12l[?25he[?25l[?12l[?25hl[?25l[?12l[?25ho[?25l[?12l[?25hp[?25l[?12l[?25he[?25l[?12l[?25hr[?25l[?12l[?25hT[?25l[?12l[?25he[?25l[?12l[?25hs[?25l[?12l[?25ht[?25l[?12l[?25hs[?25l[?12l[?25h.[?25l[?12l[?25hc[?25l[?12l[?25hl[?25l[?12l[?25ha[?25l[?12l[?25hs[?25l[?12l[?25hs[?25l[?12l[?25h [?25l[?12l[?25hF[?25l[?12l[?25hr[?25l[?12l[?25ho[?25l[?12l[?25hn[?25l[?12l[?25ht[?25l[?12l[?25he[?25l[?12l[?25hn[?25l[?12l[?25hd[?25l[?12l[?25h.[?25l[?12l[?25hc[?25l[?12l[?25hl[?25l[?12l[?25ha[?25l[?12l[?25hs[?25l[?12l[?25hs[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25ho[?25l[?12l[?25hn[?25l[?12l[?25ht[?25l[?12l[?25he[?25l[?12l[?25hn[?25l[?12l[?25hd[?25l[?12l[?25h.[?25l[?12l[?25hc[?25l[?12l[?25hl[?25l[?12l[?25ha[?25l[?12l[?25hs[?25l[?12l[?25hs[?25l[1d(B[0;7m*[93G(B[m[?12l[?25h[6;55H [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h[42m [49m(B[m[K[?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25hn[?25l[?12l[?25ht[?25l[?12l[?25he[?25l[?12l[?25hn[?25l[?12l[?25hd[?25l[?12l[?25h[42m    [49m(B[m[?25l[?12l[?25h[K[?25l[?12l[?25h.[?25l[?12l[?25hc[?25l[?12l[?25hl[?25l[?12l[?25ha[?25l[?12l[?25hs[?25l[?12l[?25hs[?25l[?12l[?25h[42m [49m(B[m[?25l[?12l[?25h c[?25l[?12l[?25ho[?25l[?12l[?25hm[?25l[?12l[?25hp[?25l[?12l[?25hi[?25l[?12l[?25hl[?25l[?12l[?25he[?25l[?12l[?25h[42m      [49m(B[m[?25l[?12l[?25h[35G[K[?25l[?12l[?25hF[?25l[?12l[?25hD[?25l[?12l[?25hT[?25l[?12l[?25he[?25l[?12l[?25hs[?25l[?12l[?25ht[?25l[49d(B[0;7mSave modified buffer?                                                                         [50;1H Y(B[m Yes[K[51d(B[0;7m N(B[m No  [51;16H (B[0;7m^C(B[m Cancel[K[49;23H[?12l[?25h[?25l[50d(B[0;7m^G(B[m Help[50;24H(B[0;7mM-D(B[m DOS Format[50;47H(B[0;7mM-A(B[m Append[50;70H(B[0;7mM-B(B[m Backup File[51d(B[0;7m^C(B[m Cancel[17G       (B[0;7mM-M(B[m Mac Format[51;47H(B[0;7mM-P(B[m Prepend[51;70H(B[0;7m^T(B[m Browse[49d(B[0;7mFile Name to Write: Makefile(B[m[?12l[?25h[?25l[49;40H[1K (B[0;7m[ Writing... ](B[m[K[1;55H(B[0;7m [93G(B[m[49;39H(B[0;7m[ Wrote 8 lines ](B[m[J[51d[?12l[?25h[51;1H[?1049l[23;0;0t[?1l>[?2004l[?2004h]0;asampath3@my-cs400-vm: ~/P105.RoleCode[01;32masampath3@my-cs400-vm[00m:[01;34m~/P105.RoleCode[00m$ nano Makefile [2@make runFDTests[C
+[?2004h]0;asampath3@my-cs400-vm: ~/P105.RoleCode[01;32masampath3@my-cs400-vm[00m:[01;34m~/P105.RoleCode[00m$ make runFDTests 
 [?2004ljavac Frontend.java
 javac -cp ../junit5.jar:. FrontendDeveloperTests.java
 java -jar ../junit5.jar -cp . -c FrontendDeveloperTests
@@ -44,7 +42,7 @@ Thanks for using JUnit! Support its development at https://junit.org/sponsoring
 [36m├─[0m [36mJUnit Vintage[0m [32m✔[0m
 [36m└─[0m [36mJUnit Platform Suite[0m [32m✔[0m
 
-Test run finished after 187 ms
+Test run finished after 179 ms
 [         4 containers found      ]
 [         0 containers skipped    ]
 [         4 containers started    ]
@@ -58,8 +56,7 @@ Test run finished after 187 ms
 [         5 tests successful      ]
 [         0 tests failed          ]
 
-[?2004h]0;asampath3@my-cs400-vm: ~/P105.RoleCode[01;32masampath3@my-cs400-vm[00m:[01;34m~/P105.RoleCode[00m$ clear
-[?2004l[H[2J[3J[?2004h]0;asampath3@my-cs400-vm: ~/P105.RoleCode[01;32masampath3@my-cs400-vm[00m:[01;34m~/P105.RoleCode[00m$ exit
+[?2004h]0;asampath3@my-cs400-vm: ~/P105.RoleCode[01;32masampath3@my-cs400-vm[00m:[01;34m~/P105.RoleCode[00m$ exit
 [?2004lexit
 
-Script done on 2024-02-28 03:13:14+00:00 [COMMAND_EXIT_CODE="0"]
+Script done on 2024-02-28 03:14:07+00:00 [COMMAND_EXIT_CODE="0"]
