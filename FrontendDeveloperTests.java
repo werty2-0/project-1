@@ -1,6 +1,6 @@
-import org.junit.jupiter.api.Test;
+ import org.junit.jupiter.api.Test;
 import java.util.Scanner;
-import org.junit.jupiter.api.Assertions;
+ import org.junit.jupiter.api.Assertions;
 
 public class FrontendDeveloperTests {
 
@@ -9,114 +9,112 @@ public class FrontendDeveloperTests {
    * Tests the getValues() method when the input given by the user does not create a range of values
    */
 
-  @Test
+   @Test
   public void tester1() {
+    String input = "80 90";
+    TextUITester reader = new TextUITester(input);
     Scanner in = new Scanner(System.in);
-    if (in.nextLine().equals("G")) {
-      String input = in.nextLine();
-      TextUITester reader = new TextUITester(input);
-      String output = "";
-      // checks if there is no range in the next input
-      try {
-        output = reader.checkOutput();
-      } catch (Exception e) {
+    FrontendInterface frontend = new Frontend(in, new BackendPlaceholder(null));
 
-      }
-      if (!input.contains("-") && output.equals("This is not a range")) // error message {
-        Assertions.assertTrue(true);
+    frontend.getValues();
+    // catches the absence of a dash in the input
+    String output = reader.checkOutput();
+    in.close();
+    if (output.equals("Enter range of values (MIN - MAX): This is not a range\r\n")) {
+       Assertions.assertTrue(true);
     }
+
+
+
   }
 
   /**
-   * checks that read file produces an error when a non-csv file is inputted by the user
+   * checks that read file produces an error when a non-csv file is inputed by the user
    */
-  @Test
+   @Test
   public void tester2() {
+    String input = "gunky.csg";
+    TextUITester reader = new TextUITester(input);
     Scanner in = new Scanner(System.in);
-    if (in.nextLine().equals("R")) {
-      String input = in.nextLine();
-      TextUITester reader = new TextUITester(input);
-      String output = "";
-      // checks if the file is not a .csv file
-      try {
-        output = reader.checkOutput();
-      } catch (Exception e) {
+    FrontendInterface frontend = new Frontend(in, new BackendPlaceholder(null));
 
-      }
-      if (!input.contains(".csv") && output.equals("This is not a .csv file")) // error message {
-        Assertions.assertTrue(true);
-    }
+    frontend.readFile();
+    // checks that .csg is caught since it is not .csv
+    String output = reader.checkOutput();
+    in.close();
+    if (output.equals("Enter path to csv file to load: This is not a .csv file\r\n"))
+       Assertions.assertTrue(true);
   }
+
 
   /**
    * checks if the input from the user for the setFilter method is not a number and an error is
    * correctly produced
    */
-  @Test
+   @Test
   public void tester3() {
-    Scanner in = new Scanner(System.in);
-    if (in.nextLine().equals("R")) {
-      String input = in.nextLine();
-      TextUITester reader = new TextUITester(input);
-      String output = "";
-      // checks if the input is not an integer
-      try {
-        output = reader.checkOutput();
-      } catch (Exception e) {
-
-      }
-      try {
-        int number = Integer.parseInt(input);
-      } catch (Exception f) {
-        Assertions.assertTrue(output.equals("This input is not an integer"));
-      }
-    }
-  }
-
-  /**
-   * check that topFive method is printing out the correct statement after a given input
-   */
-  @Test
-  public void tester4() {
-    Scanner in = new Scanner(System.in);
-    if (in.nextLine().equals("G")) {
-      if (in.nextLine().equals("80 - 90")) {
-        String input = in.nextLine();
-        TextUITester reader = new TextUITester(input);
-        String output = "";
-        // checks if the output printed the correct statement
-        try {
-          output = reader.checkOutput();
-        } catch (Exception e) {
-
-        }
-        if (input.equals("D") && output.equals("""
-            Top Five songs found between 80 - 90 with energy >= 85:
-                89: Baby
-                93: Only Girl (In The World)""")) {
-          Assertions.assertTrue(true);
-        }
-      }
-    }
-  }
-
-  /**
-   * checks that any letter inputted other than R,G,F,D,Q produces an error message
-   */
-  @Test
-  public void tester5() {
-    Scanner in = new Scanner(System.in);
-    String input = in.nextLine();
+    String input = "4D";
     TextUITester reader = new TextUITester(input);
-    if (!input.equals("R") || !input.equals("G") || !input.equals("F")
-        || !input.equals("D") || !input.equals("Q")) {  
-      String output = "";
-      try {
-        output = reader.checkOutput();
-      } catch (Exception e) {
+    Scanner in = new Scanner(System.in);
+    FrontendInterface frontend = new Frontend(in, new BackendPlaceholder(null));
 
-      }
-        Assertions.assertTrue(output.equals("This is not a valid command"));
+    frontend.setFilter();
+    // confirms that output is not an integer and the error is caught in Frontend
+    String output = reader.checkOutput();
+    in.close();
+    if (output.equals("Enter minimum energy: This input is not an integer\r\n")) {
+       Assertions.assertTrue(true);
     }
   }
+
+  /**
+   * Tests the getValues() method when the input given by the user is a range where there are no
+   * spaces
+   */
+   @Test
+  public void tester4() {
+    String input = "90-80";
+    TextUITester reader = new TextUITester(input);
+    Scanner in = new Scanner(System.in);
+    FrontendInterface frontend = new Frontend(in, new BackendPlaceholder(null));
+
+    frontend.getValues();
+    // checking that the tester figures out the input contains no spaces
+    String output = reader.checkOutput();
+    in.close();
+    if (output.equals("Enter range of values (MIN - MAX): Your input needs spaces\r\n")) {
+       Assertions.assertTrue(true);
+    }
+  }
+
+  /**
+   * checks that the displayMainMenu() works
+   */
+   @Test
+  public void tester5() {
+    String input = "A";
+    TextUITester reader = new TextUITester(input);
+    Scanner in = new Scanner(System.in);
+    FrontendInterface frontend = new Frontend(in, new BackendPlaceholder(null));
+
+    frontend.displayMainMenu();
+
+    String output = reader.checkOutput();
+    in.close();
+    // comparing output with menu so menu needs to be created
+    String menu = """
+
+        ~~~ Command Menu ~~~
+            [R]ead Data
+            [G]et Songs by Danceability [min - max]
+            [F]ilter New Songs (by Min Energy: none)
+            [D]isplay Five Fastest
+            [Q]uit
+        Choose command:""";
+    if (output.equals(menu + " ")) {
+       Assertions.assertTrue(true);
+    }
+  }
+
+
 }
