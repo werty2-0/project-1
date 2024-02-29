@@ -1,0 +1,63 @@
+Script started on 2024-02-29 05:18:12+00:00 [TERM="xterm-256color" TTY="/dev/pts/1" COLUMNS="196" LINES="52"]
+[?2004h]0;paring1507@my-cs400-vm: ~/P105.RoleCode[01;32mparing1507@my-cs400-vm[00m:[01;34m~/P105.RoleCode[00m$ [7mgit status[27mgit status
+[?2004lOn branch backend
+Your branch is ahead of 'origin/backend' by 1 commit.
+  (use "git push" to publish your local commits)
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	[31mlog[m
+
+nothing added to commit but untracked files present (use "git add" to track)
+[?2004h]0;paring1507@my-cs400-vm: ~/P105.RoleCode[01;32mparing1507@my-cs400-vm[00m:[01;34m~/P105.RoleCode[00m$ [7mgit log -1[27mgit log -1
+[?2004l[?1h=[33mcommit 08d3dae16307732b16b4f37ecb2121442b3b2830[m[33m ([m[1;36mHEAD -> [m[1;32mbackend[m[33m)[m[m
+Author: Parin <pgouraram@wisc.edu>[m
+Date:   Thu Feb 29 05:17:38 2024 +0000[m
+[m
+    added class files and Makefile[m
+[K[?1l>[?2004h]0;paring1507@my-cs400-vm: ~/P105.RoleCode[01;32mparing1507@my-cs400-vm[00m:[01;34m~/P105.RoleCode[00m$ [7mmake clean[27mmake clean
+[?2004lrm -rf *.class
+[?2004h]0;paring1507@my-cs400-vm: ~/P105.RoleCode[01;32mparing1507@my-cs400-vm[00m:[01;34m~/P105.RoleCode[00m$ [7mls[27mls
+[?2004lApp.java      BackendDeveloperTests.java  BackendPlaceholder.java  FrontendPlaceholder.java  IterableSortedCollection.java  Song.java           SortedCollectionInterface.java  songs.csv
+Backend.java  BackendInterface.java       FrontendInterface.java   ISCPlaceholder.java       Makefile                       SongInterface.java  log
+[?2004h]0;paring1507@my-cs400-vm: ~/P105.RoleCode[01;32mparing1507@my-cs400-vm[00m:[01;34m~/P105.RoleCode[00m$ [7mmake runBDTests[27mmake runBDTests
+[?2004ljavac -cp .:../junit5.jar Backend.java
+javac -cp .:../junit5.jar Song.java
+javac -cp .:../junit5.jar BackendDeveloperTests.java
+Note: BackendDeveloperTests.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+javac -cp .:../junit5.jar ISCPlaceholder.java	
+java -jar ../junit5.jar -cp . -c BackendDeveloperTests
+
+Thanks for using JUnit! Support its development at https://junit.org/sponsoring
+
+[36m╷[0m
+[36m├─[0m [36mJUnit Jupiter[0m [32m✔[0m
+[36m│  └─[0m [36mBackendDeveloperTests[0m [32m✔[0m
+[36m│     ├─[0m [34mgetRangeTests()[0m [32m✔[0m
+[36m│     ├─[0m [34mfilterEnergeticSongsTests()[0m [32m✔[0m
+[36m│     ├─[0m [34mfiveFastestTest()[0m [32m✔[0m
+[36m│     ├─[0m [34mreadDataErrorTest()[0m [32m✔[0m
+[36m│     ├─[0m [34mfiveFastestTestError()[0m [32m✔[0m
+[36m│     └─[0m [34mreadDataAll()[0m [32m✔[0m
+[36m├─[0m [36mJUnit Vintage[0m [32m✔[0m
+[36m└─[0m [36mJUnit Platform Suite[0m [32m✔[0m
+
+Test run finished after 244 ms
+[         4 containers found      ]
+[         0 containers skipped    ]
+[         4 containers started    ]
+[         0 containers aborted    ]
+[         4 containers successful ]
+[         0 containers failed     ]
+[         6 tests found           ]
+[         0 tests skipped         ]
+[         6 tests started         ]
+[         0 tests aborted         ]
+[         6 tests successful      ]
+[         0 tests failed          ]
+
+[?2004h]0;paring1507@my-cs400-vm: ~/P105.RoleCode[01;32mparing1507@my-cs400-vm[00m:[01;34m~/P105.RoleCode[00m$ [7mexit[27mexit
+[?2004lexit
+
+Script done on 2024-02-29 05:19:30+00:00 [COMMAND_EXIT_CODE="0"]
