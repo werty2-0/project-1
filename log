@@ -1,0 +1,61 @@
+Script started on 2024-02-28 03:27:13+00:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="94" LINES="51"]
+[?2004h]0;asampath3@my-cs400-vm: ~/P105.RoleCode[01;32masampath3@my-cs400-vm[00m:[01;34m~/P105.RoleCode[00m$ git status
+[?2004lOn branch frontend
+Your branch is up to date with 'origin/frontend'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	[31mmodified:   log[m
+
+no changes added to commit (use "git add" and/or "git commit -a")
+[?2004h]0;asampath3@my-cs400-vm: ~/P105.RoleCode[01;32masampath3@my-cs400-vm[00m:[01;34m~/P105.RoleCode[00m$ git log-[K -1
+[?2004l[?1h=[33mcommit e8ec86287c2f732e0747744d2d6be11e062afab7[m[33m ([m[1;36mHEAD -> [m[1;32mfrontend[m[33m, [m[1;31morigin/frontend[m[33m)[m[m
+Author: AJA SAMPATH <asampath3@wisc.edu>[m
+Date:   Wed Feb 28 03:14:29 2024 +0000[m
+[m
+    updated log file[m
+[K[?1l>[?2004h]0;asampath3@my-cs400-vm: ~/P105.RoleCode[01;32masampath3@my-cs400-vm[00m:[01;34m~/P105.RoleCode[00m$ make clean
+[?2004lfind . -type f -name "*.class" -delete
+[?2004h]0;asampath3@my-cs400-vm: ~/P105.RoleCode[01;32masampath3@my-cs400-vm[00m:[01;34m~/P105.RoleCode[00m$ ls
+[?2004lApp.java                     FrontendInterface.java         SongInterface.java
+BackendInterface.java        FrontendPlaceholder.java       SortedCollectionInterface.java
+BackendPlaceholder.java      ISCPlaceholder.java            TextUITester.java
+Frontend.java                IterableSortedCollection.java  log
+FrontendDeveloperTests.java  Makefile                       songs.csv
+[?2004h]0;asampath3@my-cs400-vm: ~/P105.RoleCode[01;32masampath3@my-cs400-vm[00m:[01;34m~/P105.RoleCode[00m$ make runFDTests 
+[?2004ljavac Frontend.java
+javac -cp ../junit5.jar:. FrontendDeveloperTests.java
+java -jar ../junit5.jar -cp . -c FrontendDeveloperTests
+
+Thanks for using JUnit! Support its development at https://junit.org/sponsoring
+
+[36m╷[0m
+[36m├─[0m [36mJUnit Jupiter[0m [32m✔[0m
+[36m│  └─[0m [36mFrontendDeveloperTests[0m [32m✔[0m
+[36m│     ├─[0m [34mtester1()[0m [32m✔[0m
+[36m│     ├─[0m [34mtester2()[0m [32m✔[0m
+[36m│     ├─[0m [34mtester3()[0m [32m✔[0m
+[36m│     ├─[0m [34mtester4()[0m [32m✔[0m
+[36m│     └─[0m [34mtester5()[0m [32m✔[0m
+[36m├─[0m [36mJUnit Vintage[0m [32m✔[0m
+[36m└─[0m [36mJUnit Platform Suite[0m [32m✔[0m
+
+Test run finished after 169 ms
+[         4 containers found      ]
+[         0 containers skipped    ]
+[         4 containers started    ]
+[         0 containers aborted    ]
+[         4 containers successful ]
+[         0 containers failed     ]
+[         5 tests found           ]
+[         0 tests skipped         ]
+[         5 tests started         ]
+[         0 tests aborted         ]
+[         5 tests successful      ]
+[         0 tests failed          ]
+
+[?2004h]0;asampath3@my-cs400-vm: ~/P105.RoleCode[01;32masampath3@my-cs400-vm[00m:[01;34m~/P105.RoleCode[00m$ exit
+[?2004lexit
+
+Script done on 2024-02-28 03:27:32+00:00 [COMMAND_EXIT_CODE="0"]
