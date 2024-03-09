@@ -159,21 +159,55 @@ public class BackendDeveloperTests {
 			backend.fiveFastest();});
 	}
 
+	/**
+	 * Checks the frontend output when a get range is called on the backend with a range of 87 - 90.
+	 */
 	@Test
-	public void integrationTest1(){
-		
+	public void integrationTestGetRange(){
+
+		//initalize scanner, backend, and frontend
+		String input = "87 - 90";
+		Scanner scanner = new Scanner(System.in);		
+		TextUITester textUI = new TextUITester(input);
 		BackendInterface backend = new Backend(new ISCPlaceholder());
+		FrontendInterface frontend = new FrontendInterface(scanner, backend);
+	
+		// get the output for the get range call
+		frontend.getValues();
+		String output = textUI.checkOutput();
+		scanner.close();
 
-		FrontendInterface frontend = new FrontendInterface(backend);
-
-
+		// create expected result from the output
+		String expected = """7 songs found between 87 - 90:  Treasure Worth It Spark The Fire Dangerous Strip That Down (feat. Quavo) There's Nothing Holdin' Me Back Talk (feat. Disclosure)""";
+		
+		// make sure output from frontend had the right output from the implementation of the backend
+		Assertions.assertEquals(expected, output);
 	}
 
-
+	/**
+	 * Checks the frotend output when a five fastest is called on the backend after get range is called with a range of 87 - 90
+	 */
 	@Test
-	public void integrationTest2(){
+	public void integrationTestFiveFastest(){
+	
+		//initalize scanner, backend, and frontend
+		String input = "87 - 90";
+                Scanner scanner = new Scanner(System.in);               
+                TextUITester textUI = new TextUITester(input);
+                BackendInterface backend = new Backend(new ISCPlaceholder());
+                FrontendInterface frontend = new FrontendInterface(scanner, backend);
 
+		// get the output for the five fastest call
+		frontend.getValues();
+		frontend.topFive();
+                String output = textUI.checkOutput();
+                scanner.close()
 
+		// create expected result from the output
+		String expected = """5 fastest songs found between 87 - 90: Dangerous Treasure Spark The Fire There's Nothing Holdin' Me Back Talk (feat. Disclosure)""";
+		
+		// make sure output from frontend had the right output from the implementation of the backend
+		Assertions.assertEquals(expected, output);
 	} 
 
 
