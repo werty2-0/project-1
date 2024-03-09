@@ -3,7 +3,7 @@ import org.junit.jupiter.api.Assertions;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.IOException;
-
+import java.util.Scanner;
 /**
  * This class provides unit tests for all four methods in the Backend Interface.
  */
@@ -170,7 +170,7 @@ public class BackendDeveloperTests {
 		Scanner scanner = new Scanner(System.in);		
 		TextUITester textUI = new TextUITester(input);
 		BackendInterface backend = new Backend(new ISCPlaceholder());
-		FrontendInterface frontend = new FrontendInterface(scanner, backend);
+		FrontendInterface frontend = new FrontendPlaceholder(scanner, backend);
 	
 		// get the output for the get range call
 		frontend.getValues();
@@ -178,7 +178,7 @@ public class BackendDeveloperTests {
 		scanner.close();
 
 		// create expected result from the output
-		String expected = """7 songs found between 87 - 90:  Treasure Worth It Spark The Fire Dangerous Strip That Down (feat. Quavo) There's Nothing Holdin' Me Back Talk (feat. Disclosure)""";
+		String expected = "7 songs found between 87 - 90:  Treasure Worth It Spark The Fire Dangerous Strip That Down (feat. Quavo) There's Nothing Holdin' Me Back Talk (feat. Disclosure)";
 		
 		// make sure output from frontend had the right output from the implementation of the backend
 		Assertions.assertEquals(expected, output);
@@ -195,16 +195,16 @@ public class BackendDeveloperTests {
                 Scanner scanner = new Scanner(System.in);               
                 TextUITester textUI = new TextUITester(input);
                 BackendInterface backend = new Backend(new ISCPlaceholder());
-                FrontendInterface frontend = new FrontendInterface(scanner, backend);
+                FrontendInterface frontend = new FrontendPlaceholder(scanner, backend);
 
 		// get the output for the five fastest call
 		frontend.getValues();
 		frontend.topFive();
                 String output = textUI.checkOutput();
-                scanner.close()
+		scanner.close();
 
 		// create expected result from the output
-		String expected = """5 fastest songs found between 87 - 90: Dangerous Treasure Spark The Fire There's Nothing Holdin' Me Back Talk (feat. Disclosure)""";
+		String expected = "5 fastest songs found between 87 - 90: Dangerous Treasure Spark The Fire There's Nothing Holdin' Me Back Talk (feat. Disclosure)";
 		
 		// make sure output from frontend had the right output from the implementation of the backend
 		Assertions.assertEquals(expected, output);
