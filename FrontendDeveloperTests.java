@@ -1,15 +1,15 @@
- import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Test;
 import java.util.Scanner;
- import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Assertions;
 
 public class FrontendDeveloperTests {
 
-
+ 
   /**
    * Tests the getValues() method when the input given by the user does not create a range of values
    */
 
-   @Test
+  @Test
   public void tester1() {
     String input = "80 90";
     TextUITester reader = new TextUITester(input);
@@ -21,7 +21,7 @@ public class FrontendDeveloperTests {
     String output = reader.checkOutput();
     in.close();
     if (output.equals("Enter range of values (MIN - MAX): This is not a range\r\n")) {
-       Assertions.assertTrue(true);
+      Assertions.assertTrue(true);
     }
 
 
@@ -31,7 +31,7 @@ public class FrontendDeveloperTests {
   /**
    * checks that read file produces an error when a non-csv file is inputed by the user
    */
-   @Test
+  @Test
   public void tester2() {
     String input = "gunky.csg";
     TextUITester reader = new TextUITester(input);
@@ -43,7 +43,7 @@ public class FrontendDeveloperTests {
     String output = reader.checkOutput();
     in.close();
     if (output.equals("Enter path to csv file to load: This is not a .csv file\r\n"))
-       Assertions.assertTrue(true);
+      Assertions.assertTrue(true);
   }
 
 
@@ -51,7 +51,7 @@ public class FrontendDeveloperTests {
    * checks if the input from the user for the setFilter method is not a number and an error is
    * correctly produced
    */
-   @Test
+  @Test
   public void tester3() {
     String input = "4D";
     TextUITester reader = new TextUITester(input);
@@ -63,7 +63,7 @@ public class FrontendDeveloperTests {
     String output = reader.checkOutput();
     in.close();
     if (output.equals("Enter minimum energy: This input is not an integer\r\n")) {
-       Assertions.assertTrue(true);
+      Assertions.assertTrue(true);
     }
   }
 
@@ -71,7 +71,7 @@ public class FrontendDeveloperTests {
    * Tests the getValues() method when the input given by the user is a range where there are no
    * spaces
    */
-   @Test
+  @Test
   public void tester4() {
     String input = "90-80";
     TextUITester reader = new TextUITester(input);
@@ -83,14 +83,14 @@ public class FrontendDeveloperTests {
     String output = reader.checkOutput();
     in.close();
     if (output.equals("Enter range of values (MIN - MAX): Your input needs spaces\r\n")) {
-       Assertions.assertTrue(true);
+      Assertions.assertTrue(true);
     }
   }
 
   /**
    * checks that the displayMainMenu() works
    */
-   @Test
+  @Test
   public void tester5() {
     String input = "A";
     TextUITester reader = new TextUITester(input);
@@ -112,7 +112,58 @@ public class FrontendDeveloperTests {
             [Q]uit
         Choose command:""";
     if (output.equals(menu + " ")) {
-       Assertions.assertTrue(true);
+      Assertions.assertTrue(true);
+    }
+  }
+
+  /**
+   * checks that the getValues() method works for input "80 - 90"
+   */
+  @Test
+  public void testIntegration1() {
+    String input = "80 - 90";
+    TextUITester reader = new TextUITester(input);
+    BackendInterface backend = new BackendPlaceholder(null);
+    Scanner in = new Scanner(System.in);
+    FrontendInterface frontend = new Frontend(in, backend);
+
+    frontend.getValues();
+
+    String output = reader.checkOutput();
+    in.close();
+    // comparing output with menu so menu needs to be created
+    if (output.equals("""
+        5 songs found between 80 - 90:
+        Baby
+        Dynamite
+        Secrets
+        Empire State of Mind (Part II) Broken Down
+        Only Girl (In The World)""")) {
+      Assertions.assertTrue(true);
+    }
+  }
+  
+  /**
+   * checks that the setFilter() method works for input "85"
+   */
+  @Test
+  public void testIntegration2() {
+    String input = "85";
+    TextUITester reader = new TextUITester(input);
+    BackendInterface backend = new BackendPlaceholder(null);
+    Scanner in = new Scanner(System.in);
+    FrontendInterface frontend = new Frontend(in, backend);
+
+    frontend.setFilter();
+
+    String output = reader.checkOutput();
+    in.close();
+    // comparing output with menu so menu needs to be created
+    if (output.equals("""
+        2 songs found between 80 - 90 with energy >= 85:
+        Baby
+        Only Girl (In The World)""")) {
+      Assertions.assertTrue(true);
     }
   }
 
