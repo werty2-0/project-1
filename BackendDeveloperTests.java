@@ -157,6 +157,23 @@ public class BackendDeveloperTests {
 		// make sure this call to five fastest is throwing a Illegal State Excpetion
 		 Assertions.assertThrows( IllegalStateException.class, () -> {
 			backend.fiveFastest();});
+	}
+
+	@Test
+	public void integrationTest1(){
+		
+		BackendInterface backend = new Backend(new ISCPlaceholder());
+
+		FrontendInterface frontend = new FrontendInterface(backend);
+
+
+	}
+
+
+	@Test
+	public void integrationTest2(){
+
+
 	} 
 
 
