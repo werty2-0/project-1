@@ -1,3 +1,4 @@
+
 runBDTests: Backend.java Song.java BackendDeveloperTests.java ISCPlaceholder.java
 	javac -cp .:../junit5.jar Backend.java
 	javac -cp .:../junit5.jar Song.java
@@ -5,6 +6,16 @@ runBDTests: Backend.java Song.java BackendDeveloperTests.java ISCPlaceholder.jav
 	javac -cp .:../junit5.jar ISCPlaceholder.java	
 	java -jar ../junit5.jar -cp . -c BackendDeveloperTests
 
+runFDTests: Frontend.class compileFDTest
+	java -jar ../junit5.jar -cp . -c FrontendDeveloperTests
+
+Frontend.class: Frontend.java
+	javac Frontend.java
+
+compileFDTest: FrontendDeveloperTests.java
+	javac -cp ../junit5.jar:. FrontendDeveloperTests.java
 
 clean: 
 	rm -rf *.class
+
+
