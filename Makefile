@@ -15,6 +15,10 @@ Frontend.class: Frontend.java
 compileFDTest: FrontendDeveloperTests.java
 	javac -cp ../junit5.jar:. FrontendDeveloperTests.java
 
+runApp: App.java
+	javac App.java
+	java App
+
 clean: 
 	rm -rf *.class
 

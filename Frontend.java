@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Scanner;
 
 public class Frontend implements FrontendInterface {
@@ -6,6 +7,7 @@ public class Frontend implements FrontendInterface {
   private String min = "min";
   private String max = "max";
   private String energy = "none";
+  private boolean readFile = false;
   Scanner in = new Scanner(System.in);
 
   public Frontend(Scanner in, BackendInterface back) {
@@ -69,13 +71,17 @@ public class Frontend implements FrontendInterface {
     System.out.print("Enter path to csv file to load: ");
     String reading = in.nextLine();
     // if the file is not a .csv, an exception is caught
-    if(!reading.contains(".csv")) {
+    if (!reading.contains(".csv")) {
       System.out.println("This is not a .csv file");
     }
+    else {
     try {
       backend.readData(reading);
+      System.out.println("Done reading file.");
+      readFile = true;
     } catch (Exception e) {
       System.out.println("This is not a .csv file");
+    }
     }
   }
 
@@ -94,19 +100,31 @@ public class Frontend implements FrontendInterface {
       if (!reading.contains("-")) { // range is non-existent
         System.out.println("This is not a range");
       } else {
-        // set max and min
-        try {
-          int i = reading.indexOf("-");
-          minimum = Integer.parseInt(reading.substring(0, i - 1));
-          maximum = Integer.parseInt(reading.substring(i + 2));
-          backend.getRange(minimum, maximum);
-        } catch (Exception e) {
-          // range is not a valid range (e.g. min is greater than max)
-          System.out.println("You did not enter a valid range");
-        }
+        // set max and min but first check a file exists
+        if (!readFile) {
+          System.out.println("There exists no file");
+        } else
+          try {
+            int i = reading.indexOf("-");
+            minimum = Integer.parseInt(reading.substring(0, i - 1));
+            maximum = Integer.parseInt(reading.substring(i + 2));
+            // print out all the results
+            List<String> result = backend.getRange(minimum, maximum);
+            min = reading.substring(0, i - 1);
+            max = reading.substring(i + 2);
+            System.out.println(
+                "\n" + result.size() + " songs found between " + minimum + " - " + maximum + ":");
+            for (int j = 0; j < result.size(); j++) {
+              System.out.println(result.get(j));
+            }
+          } catch (Exception e) {
+            // range is not a valid range (e.g. min is greater than max)
+            System.out.println("You did not enter a valid range");
+          }
       }
     }
   }
+
 
   /**
    * Provides text-based user interface and error handling for the [F]ilter Energetic Songs (by Min
@@ -114,15 +132,33 @@ public class Frontend implements FrontendInterface {
    */
   @Override
   public void setFilter() {
-    System.out.print("Enter minimum energy: ");
-    String reading = in.nextLine();
-    int energy = 0;
-    try {
-      // checks if energy is indeed an integer and throws and exception otherwise
-      energy = Integer.parseInt(reading);
-      backend.filterEnergeticSongs(energy);
-    } catch (Exception e) {
-      System.out.println("This input is not an integer");
+    if (!readFile) {
+      System.out.println("There exists no file");
+    } else {
+      // need to check that a min and max exist
+      if (min.equals("min") || max.equals("max")) {
+        System.out.println("You need a range");
+      } else {
+        System.out.print("Enter minimum energy: ");
+        String reading = in.nextLine();
+        int newEnergy = 0;
+        try {
+          // checks if energy is indeed an integer and throws and exception otherwise
+          newEnergy = Integer.parseInt(reading);
+          // print everything out
+          List<String> result = backend.filterEnergeticSongs(newEnergy);
+          energy = reading;
+          System.out.println(result.size() + " songs found between " + min + " - " + max
+              + " with energy >= " + energy + ":");
+          for (int i = 0; i < result.size(); i++) {
+            System.out.println(result.get(i));
+          }
+          // sets global variable energy to the input
+          
+        } catch (Exception e) {
+          System.out.println("This input is not an integer");
+        }
+      }
     }
   }
 
@@ -131,7 +167,24 @@ public class Frontend implements FrontendInterface {
    */
   @Override
   public void topFive() {
-    backend.fiveFastest();
+    if (!readFile) {
+      System.out.println("There exists no file");
+    } else {
+      // need to check min, max and energy have been set
+      if (min.equals("min") || max.equals("max")) {
+        System.out.println("You need a range");
+      } else {
+        List<String> result = backend.fiveFastest();
+        // need to check if energy exists so that printing energy doesn't give an error
+        if (!energy.equals("none")) {
+          System.out.println("\nTop Five songs found between " + min + " - " + max
+              + " with energy >= " + energy + ":");
+        } else {
+          System.out.println("\nTop Five songs found between " + min + " - " + max);
+        }
+        for (int i = 0; i < result.size(); i++)
+          System.out.println(result.get(i));
+      }
+    }
   }
-
 }

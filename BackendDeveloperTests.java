@@ -22,7 +22,7 @@ public class BackendDeveloperTests {
 			backend.readData(error);});
 	}
 	/**
-	 * This testor method tes'ts the read data method in its ability to read the songs.csv file properly. In addition, it also makes sure it reads all the data in the csv file.
+	 * This testor method test's the read data method in its ability to read the songs.csv file properly. In addition, it also makes sure it reads all the data in the csv file.
 	 */
 	@Test
 	public void readDataAll(){
@@ -135,8 +135,8 @@ public class BackendDeveloperTests {
 		// create expected result
 		List<String> expectedResult = new ArrayList<>();
 		expectedResult.add("130: Anaconda");
-                expectedResult.add("121: Bad Liar");
                 expectedResult.add("130: Drip (feat. Migos)");
+                expectedResult.add("121: Bad Liar");
 
 		// make sure result is correct
 		Assertions.assertIterableEquals(expectedResult, result,"" +  result.isEmpty());
@@ -160,57 +160,103 @@ public class BackendDeveloperTests {
 	}
 
 	/**
-	 * Checks the frontend output when a get range is called on the backend with a range of 87 - 90.
+	 * This testor method tests the frontend's output when a proper call to Read File is made.
+	 */
+	@Test
+	public void integrationTestReadData(){
+		
+		// set up input, backend, and frontend 
+	    	String input = "songs.csv";
+		TextUITester textUI = new TextUITester(input);
+		BackendInterface backend = new Backend(new IterableRedBlackTree<SongInterface>());
+		Scanner scanner = new Scanner(System.in);
+	    	FrontendInterface frontend = new Frontend(scanner, backend);
+
+		// get output for the read Data/read File call from the frontend
+	    	frontend.readFile();
+	    	String output = textUI.checkOutput();
+	    	scanner.close();
+
+		// make sure frontend outputs correct output retrieved from backend
+		Assertions.assertTrue(output.contains("Done reading file"));
+
+	}
+
+	/**
+	 * This testor method tests the frontend's output when a call to Get Range is called on a range between a danceability of 87 - 40.
 	 */
 	@Test
 	public void integrationTestGetRange(){
 
-		//initalize scanner, backend, and frontend
-		String input = "87 - 90";
-		Scanner scanner = new Scanner(System.in);		
-		TextUITester textUI = new TextUITester(input);
-		BackendInterface backend = new Backend(new ISCPlaceholder());
-		FrontendInterface frontend = new FrontendPlaceholder(scanner, backend);
-	
-		// get the output for the get range call
-		frontend.getValues();
-		String output = textUI.checkOutput();
-		scanner.close();
+		// set up input, backend, and frontend 
+		String input = "songs.csv\n87 - 90";
+                TextUITester textUI = new TextUITester(input);
+                BackendInterface backend = new Backend(new IterableRedBlackTree<SongInterface>());
+                Scanner scanner = new Scanner(System.in);
+                FrontendInterface frontend = new Frontend(scanner, backend);
 
-		// create expected result from the output
-		String expected = "7 songs found between 87 - 90:  Treasure Worth It Spark The Fire Dangerous Strip That Down (feat. Quavo) There's Nothing Holdin' Me Back Talk (feat. Disclosure)";
-		
-		// make sure output from frontend had the right output from the implementation of the backend
-		Assertions.assertEquals(expected, output);
+		// get output for the get Values/get Range call on a range between 87 - 90 from the frontend
+            	frontend.readFile();
+		frontend.getValues();
+            	String output = textUI.checkOutput();
+            	scanner.close();
+
+		// make sure frontend outputs correct output retrieved from backend
+		Assertions.assertTrue(output.contains("7 songs found between 87 - 90:\nThere's Nothing Holdin' Me Back\nStrip That Down (feat. Quavo)\nTreasure\nSpark The Fire\nWorth It\nTalk (feat. Disclosure)\nDangerous"));
+	}
+
+
+	/**
+	 * This testor method tests the frontend's output when a call to five fastest is called on a range between a danceability of 87 - 90.
+	 */
+	@Test
+	public void partnerTestFiveFastest(){
+
+		// set up input, backend, and frontend
+		String input = "songs.csv\n87 - 90";
+                TextUITester textUI = new TextUITester(input);
+                BackendInterface backend = new Backend(new IterableRedBlackTree<SongInterface>());
+                Scanner scanner = new Scanner(System.in);
+                FrontendInterface frontend = new Frontend(scanner, backend);
+
+		// get output from the five fastest method call on a range between 87 - 90 from the frontend
+                frontend.readFile();
+                frontend.getValues();
+		frontend.topFive();
+                String output = textUI.checkOutput();
+                scanner.close();
+
+		// make sure frontend outputs correct output retrieved from backend
+		Assertions.assertTrue(output.contains("Top Five songs found between 87 - 90\n122: There's Nothing Holdin' Me Back\n116: Treasure\n120: Spark The Fire\n136: Talk (feat. Disclosure)\n109: Dangerous"));
+
+
 	}
 
 	/**
-	 * Checks the frotend output when a five fastest is called on the backend after get range is called with a range of 87 - 90
+	 * This testor method tests the frontend's output when a call to set filter is called on a range between a danceability of 87 - 90.
 	 */
 	@Test
-	public void integrationTestFiveFastest(){
-	
-		//initalize scanner, backend, and frontend
-		String input = "87 - 90";
-                Scanner scanner = new Scanner(System.in);               
+	public void partnerTestSetFilter(){
+
+		// set up input, backend, and frontend
+		String input = "songs.csv\n87 - 90\n55";
                 TextUITester textUI = new TextUITester(input);
-                BackendInterface backend = new Backend(new ISCPlaceholder());
-                FrontendInterface frontend = new FrontendPlaceholder(scanner, backend);
+                BackendInterface backend = new Backend(new IterableRedBlackTree<SongInterface>());
+                Scanner scanner = new Scanner(System.in);
+                FrontendInterface frontend = new Frontend(scanner, backend);
 
-		// get the output for the five fastest call
+		// get output from the set filter  method call on a range between 87 - 90 from the frontend
+		frontend.readFile();
 		frontend.getValues();
-		frontend.topFive();
-                String output = textUI.checkOutput();
+		frontend.setFilter();
+		String output = textUI.checkOutput();
 		scanner.close();
+		System.out.println(output);
 
-		// create expected result from the output
-		String expected = "5 fastest songs found between 87 - 90: Dangerous Treasure Spark The Fire There's Nothing Holdin' Me Back Talk (feat. Disclosure)";
-		
-		// make sure output from frontend had the right output from the implementation of the backend
-		Assertions.assertEquals(expected, output);
-	} 
+		// make sure frontend outputs correct output retrieved from backend
+		Assertions.assertTrue(output.contains("4 songs found between 87 - 90 with energy >= 55:\nThere's Nothing Holdin' Me Back\nTreasure\nSpark The Fire\nWorth It"));
 
 
+	}
 
-
-}
+}	
