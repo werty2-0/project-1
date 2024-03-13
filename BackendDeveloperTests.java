@@ -251,10 +251,42 @@ public class BackendDeveloperTests {
 		frontend.setFilter();
 		String output = textUI.checkOutput();
 		scanner.close();
-		System.out.println(output);
 
 		// make sure frontend outputs correct output retrieved from backend
 		Assertions.assertTrue(output.contains("4 songs found between 87 - 90 with energy >= 55:\nThere's Nothing Holdin' Me Back\nTreasure\nSpark The Fire\nWorth It"));
+
+
+	}
+
+	@Test
+	public void partnerTestTopFiveNoFile(){
+
+		// set up input, backend, and frontend
+                String input = "";
+                TextUITester textUI = new TextUITester(input);
+                Scanner scanner = new Scanner(System.in);
+                FrontendInterface frontend = new Frontend(scanner, new BackendPlaceholder(null));
+
+		frontend.topFive();	
+		String output = textUI.checkOutput();
+		scanner.close();
+		Assertions.assertTrue(output.contains("There exists no file"));
+		
+	}
+
+	@Test
+	public void partnerTestTopFive(){
+		String input = "";
+		System.out.println("hi");
+                TextUITester textUI = new TextUITester(input);
+		 System.out.println("did not pass scanner");
+                 Scanner scanner = new Scanner(System.in);
+                 FrontendInterface frontend = new Frontend(scanner, new BackendPlaceholder(null));
+		 System.out.println("did not pass scanner");
+		frontend.getValues();
+		//String output = textUI.checkOutput();
+		//scanner.close();
+		//Assertions.assertTrue(output.contains("This is not a valid command"));
 
 
 	}
