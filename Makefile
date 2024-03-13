@@ -11,6 +11,11 @@ runFDTests:
 runBDTests:
 	javac -cp .:../junit5.jar BackendDeveloperTests.java
 	java -jar ../junit5.jar -cp . -c BackendDeveloperTests
+runApp:
+	javac -cp ../junit.jar:. FrontendDeveloperTests.java
+	javac -cp ../junit.jar:. BackendDeveloperTests.java
+	javac App.java
+	java App
 
 clean:
 	find . -type f -name "*.class" -delete
