@@ -19,49 +19,72 @@ public class Song implements SongInterface {
 	 */
 	public Song(String row){
 
-		//split columns
-      		String[] information = row.split(",");
+                // split song row into each section
+                String[] information = row.split(",");
 
-      		
-      		String[] result  = new String[14];
+                // create array of final data from the song row
+                String[] result  = new String[9];
 
-      		int i = 0; // tracking position in result
-      		int j = 0; // tracking position in splitted information
-      
-      		while(i < 14){
+                // j will keep track of the index in the information array
+                int j = 0;
 
-	              	// if it is not special, put the information straight into the result
-        	      	if(j > information.length - 1) break;
-              		if(!information[j].contains("\"")) {
-                      		result[i] = information[j];
-                     		i++;
-                    		j++;
-              		}
+                // loop through 9 times to get 9 data points within our final result
+                for(int i = 0; i < result.length;i++) {
+                        // if our data point has no quotation at the start, it is not a special case so we can directly put it in the final result array
+                        if(information[j].charAt(0) != '\"') {
+                                result[i] = information[j];
+                                j++;
+                        }
 
-              		// if information has extra comma, we have to concatnate with the next spot
-              		else{
-                      		//find next open spot
-                      		int y = j + 1;
-		      		// keep looking in the split array until find whole interval 
-                      		while(information[y].contains("\"")){
-                      			y++;
-                     		}
-				// create string to concatanate with
-			      	String concat = "";
-	
-			// Go through the entire interval and start concatnating the words together, getting rid of the quotation marks;
-		        for(int z = j; z < y; z++) {
-	              		if(z == j) concat += information[z].substring(1);
-              			else if(z == y - 1) concat += information[z].substring(0, information[z].length() - 1);
-              			else concat += information[z];
-              			if(z + 1 != y) concat += ",";
-		      	}
-	      		// put concatnated information into our result and iterate further
-              		result[i] = concat;
-              		i++;
-              		j = y + 1;
-      			}
-		}
+                        // else, we have to concatenate elements wrongly splitted by commas and/or replace double quotes with a single quote
+                        else {
+
+                                // concat will hold final concatenated data point to put into result array
+                                String concat = "";
+
+                                // start and back of data points in the information array to concatenate together
+                                int start = i;
+                                int back = i;
+
+                                // find amount of quotes in element
+                                //Needed to know so that we know when we have to concatenate with other elements to create full data point
+                                int quoteCount = 0;
+                                for(int b = information[start].length() - 1;b >= 0; b--) {
+                                        if(information[start].charAt(b) == '\"') quoteCount++;
+                                }
+
+                                // if their are an odd amount of quotes in the element, keep advancing back pointer till we find the element with the ending quote
+                                if(quoteCount % 2 == 1) {
+                                        back++;
+                                        while(information[back].charAt(information[back].length() - 1) !=  '\"') {
+                                                back++;
+                                        }
+                                }
+
+                                // concatnate multiple information spots together if we need to
+                                if(start != back) {
+                                        // goes from start to back index in the information array to concatenate the elements that were wrongly splitted together
+                                        for(int z = start; z <= back;z++) {
+                                        // makes sure to get rid of single quotes at the start and end of the elements and add commas when concatenating
+                                                if(z == start) concat += information[z].substring(1);
+                                                else if(z == back) concat += information[z].substring(0, information[z].length() - 1);
+                                                else concat += information[z];
+                                                if(z < back) concat += ",";
+                                        }
+                                }
+                                else {
+                                        // if concatenation is not needed between multiple elements, just remove the quotes at the start and back of the element
+                                        concat += information[start].substring(1, information[start].length() - 1);
+                                }
+
+                                // replace all double quotes within the data to a single quote
+                                concat = concat.replace("\"\"", "\"");
+
+                                // put concatenated data point in result and iterate
+                                result[i] = concat;
+                                j = back + 1;
+                        }
+                }
 		// instantiate instance variables
 		title = result[0];
 		artist = result[1];

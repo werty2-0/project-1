@@ -4,24 +4,25 @@ import org.junit.jupiter.api.Assertions;
 
 public class FrontendDeveloperTests {
 
- 
+
   /**
    * Tests the getValues() method when the input given by the user does not create a range of values
    */
 
   @Test
   public void tester1() {
-    String input = "80 90";
+    String input = "80   90";
     TextUITester reader = new TextUITester(input);
     Scanner in = new Scanner(System.in);
     FrontendInterface frontend = new Frontend(in, new BackendPlaceholder(null));
 
     frontend.getValues();
-    // catches the absence of a dash in the input
     String output = reader.checkOutput();
+    // catches the absence of a dash in the input
+
     in.close();
-    if (output.equals("Enter range of values (MIN - MAX): This is not a range\r\n")) {
-      Assertions.assertTrue(true);
+    if (!output.contains("This is not a range")) {
+      Assertions.assertFalse(true);
     }
 
 
@@ -42,28 +43,28 @@ public class FrontendDeveloperTests {
     // checks that .csg is caught since it is not .csv
     String output = reader.checkOutput();
     in.close();
-    if (output.equals("Enter path to csv file to load: This is not a .csv file\r\n"))
-      Assertions.assertTrue(true);
+    if (!output.trim().contains("Enter path to csv file to load: This is not a .csv file"))
+      Assertions.assertFalse(true);
   }
 
 
   /**
-   * checks if the input from the user for the setFilter method is not a number and an error is
-   * correctly produced
+   * checks if the input from the user for the setFilter method does not have a .csv file set
+   * beforehand
    */
   @Test
   public void tester3() {
-    String input = "4D";
+    String input = "42";
     TextUITester reader = new TextUITester(input);
     Scanner in = new Scanner(System.in);
     FrontendInterface frontend = new Frontend(in, new BackendPlaceholder(null));
 
     frontend.setFilter();
-    // confirms that output is not an integer and the error is caught in Frontend
+    // confirms that output is valid but that there does not exist a csv file
     String output = reader.checkOutput();
     in.close();
-    if (output.equals("Enter minimum energy: This input is not an integer\r\n")) {
-      Assertions.assertTrue(true);
+    if (!output.contains("There exists no file")) {
+      Assertions.assertFalse(true);
     }
   }
 
@@ -82,8 +83,8 @@ public class FrontendDeveloperTests {
     // checking that the tester figures out the input contains no spaces
     String output = reader.checkOutput();
     in.close();
-    if (output.equals("Enter range of values (MIN - MAX): Your input needs spaces\r\n")) {
-      Assertions.assertTrue(true);
+    if (!output.contains("Your input needs spaces")) {
+      Assertions.assertFalse(true);
     }
   }
 
@@ -111,61 +112,105 @@ public class FrontendDeveloperTests {
             [D]isplay Five Fastest
             [Q]uit
         Choose command:""";
-    if (output.equals(menu + " ")) {
-      Assertions.assertTrue(true);
+    if (!output.equals(menu + " ")) {
+      Assertions.assertFalse(true);
     }
   }
 
   /**
-   * checks that the getValues() method works for input "80 - 90"
+   * checks that the readFile() method works properly for songs.csv
    */
   @Test
   public void testIntegration1() {
-    String input = "80 - 90";
+    String input = "songs.csv";
     TextUITester reader = new TextUITester(input);
-    BackendInterface backend = new BackendPlaceholder(null);
+    IterableSortedCollection<SongInterface> tree = new IterableRedBlackTree<>();
+    Backend backend = new Backend(tree);
     Scanner in = new Scanner(System.in);
     FrontendInterface frontend = new Frontend(in, backend);
 
-    frontend.getValues();
-
+    frontend.readFile();
     String output = reader.checkOutput();
     in.close();
-    // comparing output with menu so menu needs to be created
-    if (output.equals("""
-        5 songs found between 80 - 90:
-        Baby
-        Dynamite
-        Secrets
-        Empire State of Mind (Part II) Broken Down
-        Only Girl (In The World)""")) {
-      Assertions.assertTrue(true);
+    // checking that the print output contains the valid statement
+    if (!output.contains("Done reading file")) {
+      Assertions.assertFalse(true);
     }
   }
-  
+
   /**
-   * checks that the setFilter() method works for input "85"
+   * checks that the setFilter() method outputs the need for a range despite already having a file
+   * thanks to the backend part of the project
    */
   @Test
   public void testIntegration2() {
-    String input = "85";
+    String input = "songs.csv";
     TextUITester reader = new TextUITester(input);
-    BackendInterface backend = new BackendPlaceholder(null);
+    IterableSortedCollection<SongInterface> tree = new IterableRedBlackTree<>();
+    Backend backend = new Backend(tree);
     Scanner in = new Scanner(System.in);
     FrontendInterface frontend = new Frontend(in, backend);
-
+    // reading the file first so that a file exists when calling setFilter()
+    frontend.readFile();
+    
     frontend.setFilter();
 
     String output = reader.checkOutput();
     in.close();
-    // comparing output with menu so menu needs to be created
-    if (output.equals("""
-        2 songs found between 80 - 90 with energy >= 85:
-        Baby
-        Only Girl (In The World)""")) {
-      Assertions.assertTrue(true);
+    // checking that the setFilter failed despite the backend giving it a csv file
+
+    if (!output.contains("You need a range")) {
+      Assertions.assertFalse(true);
     }
   }
 
+  /**
+   * checks that the range from 80 - 81 works
+   */
+  @Test
+  public void testPartner1() {   
+    String input = "songs.csv\n80 - 81";
+    TextUITester reader = new TextUITester(input);
+    
+    IterableSortedCollection<SongInterface> tree = new IterableRedBlackTree<>();
+    Backend backend = new Backend(tree);
+    Scanner in = new Scanner(input);
+    FrontendInterface frontend = new Frontend(in, backend);
+    // call both read file and get values
+    frontend.readFile();
+    frontend.getValues();
+    String output = reader.checkOutput();
+    in.close();
+    // checking that the print output contains the valid statement
+    if (!output.contains("19 songs found between 80 - 81:")) {
+      Assertions.assertFalse(true);
+    }
+  }
+  
+  /**
+   * checks that the topFive for 80 - 81 works
+   */
+  @Test
+  public void testPartner2() {   
+    String input = "songs.csv\n80 - 81";
+    TextUITester reader = new TextUITester(input);
+    
+    IterableSortedCollection<SongInterface> tree = new IterableRedBlackTree<>();
+    Backend backend = new Backend(tree);
+    Scanner in = new Scanner(input);
+    FrontendInterface frontend = new Frontend(in, backend);
+    // call both read file and get values
+    frontend.readFile();
+    frontend.getValues();
+    frontend.topFive();
+    String output = reader.checkOutput();
+    System.out.println(output);
+    in.close();
+    // checking that the print output contains one of the correct songs
+    if (!output.contains("Meet Me Halfway")) {
+      Assertions.assertFalse(true);
+    }
+  }
+  
 
 }

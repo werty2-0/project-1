@@ -3,7 +3,7 @@ import org.junit.jupiter.api.Assertions;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.IOException;
-
+import java.util.Scanner;
 /**
  * This class provides unit tests for all four methods in the Backend Interface.
  */
@@ -135,8 +135,8 @@ public class BackendDeveloperTests {
 		// create expected result
 		List<String> expectedResult = new ArrayList<>();
 		expectedResult.add("130: Anaconda");
-                expectedResult.add("121: Bad Liar");
                 expectedResult.add("130: Drip (feat. Migos)");
+                expectedResult.add("121: Bad Liar");
 
 		// make sure result is correct
 		Assertions.assertIterableEquals(expectedResult, result,"" +  result.isEmpty());
@@ -157,8 +157,7 @@ public class BackendDeveloperTests {
 		// make sure this call to five fastest is throwing a Illegal State Excpetion
 		 Assertions.assertThrows( IllegalStateException.class, () -> {
 			backend.fiveFastest();});
-	} 
-
+	}
 
 
 

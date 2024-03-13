@@ -1,11 +1,4 @@
 import java.util.Iterator;
-
-public class ISCPlaceholder<T extends Comparable<T>>
-    implements IterableSortedCollection<T> {
-
-    private T value;
-    
-    public boolean insert(T data)
 import java.util.ArrayList;
 
 public class ISCPlaceholder
@@ -19,7 +12,6 @@ public class ISCPlaceholder
 	return true;
     }
 
-    public boolean contains(Comparable<T> data) {
     public boolean contains(Comparable<SongInterface> data) {
 	return true;
     }
@@ -29,19 +21,12 @@ public class ISCPlaceholder
     }
     
     public int size() {
-	return 3;
 	return 603;
     }
 
     public void clear() {
     }
 
-    public void setIterationStartPoint(Comparable<T> startPoint) {	
-    }
-
-    public Iterator<T> iterator() {
-	
-	return java.util.Arrays.asList(value, value, value).iterator();
     public void setIterationStartPoint(Comparable<SongInterface> startPoint) {	
     }
 

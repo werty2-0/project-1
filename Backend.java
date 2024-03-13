@@ -96,6 +96,7 @@ public class Backend implements BackendInterface {
 			for(int i = 0; i < songList.size(); i++){
 				if( songList.get(i).getEnergy() < energyFilter){
 					songList.remove(i);
+					i--;
 				} 
 			}
 
@@ -126,6 +127,7 @@ public class Backend implements BackendInterface {
      	*/
     	public List<String> filterEnergeticSongs(int minEnergy){
 
+		
 		// update the energy filter
 		this.energyFilter = minEnergy;
 
@@ -142,6 +144,7 @@ public class Backend implements BackendInterface {
 		for(int i = 0; i < songs.size(); i++){
 			if(songs.get(i).getEnergy() < this.energyFilter){
 				songs.remove(i);
+				i--;
 			}
 		}
 
@@ -184,10 +187,13 @@ public class Backend implements BackendInterface {
 			for(int i = 0; i < songs.size(); i++){
                 		if(songs.get(i).getEnergy() < this.energyFilter){
                                 	songs.remove(i);
+					i--;
                         	}	
                 	}
 
 		}
+
+
 
 
 		// determine the amount of songs in the fast range
@@ -201,16 +207,17 @@ public class Backend implements BackendInterface {
 				if(fastest == null) fastest = songs.get(j);
 				else if(songs.get(j).getBPM() > fastest.getBPM()) fastest = songs.get(j);  
 			}
+			songs.remove(fastest);
 			resultSongs.add(fastest);
 
 		}
 
-                        // re-sort the array based on danceability
-                        Collections.sort(resultSongs);
+		// re-sort the array based on danceability
+		Collections.sort(resultSongs);
 
-			// change format of answer to one specified in javadoc
-			List<String> result = new ArrayList<>();
-			for(SongInterface song: songs){
+		// change format of answer to one specified in javadoc
+		List<String> result = new ArrayList<>();
+			for(SongInterface song: resultSongs){
                         	String toAdd = song.getBPM() + ": " + song.getTitle();
                         	result.add(toAdd);
 			}
