@@ -20,7 +20,9 @@ public class Frontend implements FrontendInterface {
    */
   @Override
   public void runCommandLoop() {
+
     displayMainMenu();
+
     String reading = in.nextLine();
     // loop stops recurring once Q is pressed
     if (!reading.equals("Q")) {
