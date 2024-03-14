@@ -37,12 +37,7 @@ public class BackendDeveloperTests {
 		// make sure that read the songs.csv file reads all the lines it should read.
 		Assertions.assertEquals(603, iscp.size());
 		
-
-
 	}
-
-
-
 
 	/**
 	 * This testor method test's the get Range method's ability to return a list of songs within a certain dancibility range and after a energy filter has been applied.
@@ -183,7 +178,7 @@ public class BackendDeveloperTests {
 	}
 
 	/**
-	 * This testor method tests the frontend's output when a call to Get Range is called on a range between a danceability of 87 - 40.
+	 * This testor method tests the frontend's output when a proper call to Get Range is called on a range between a danceability of 87 - 90.
 	 */
 	@Test
 	public void integrationTestGetRange(){
@@ -206,7 +201,7 @@ public class BackendDeveloperTests {
 	}
 
 	/**
-	 * This testor method tests the frontend's output when a call to top five is called without previously reading the song.csv file 
+	 * This testor method tests the frontend's output when a call to top five is called without previously reading the song.csv file. 
 	 */	
 	@Test
 	public void partnerTestTopFiveNoFile(){
@@ -238,7 +233,7 @@ public class BackendDeveloperTests {
                 Scanner scanner = new Scanner(System.in);
                 FrontendInterface frontend = new Frontend(scanner, new BackendPlaceholderPartnerTests(null));
 
-		// make a call to TopFive on the frontend after after the songs file is read and a range is created. Should produce valid output
+		// make a call to TopFive on the frontend after after the songs file is read and a range is created.
 		frontend.readFile();
 		frontend.getValues();
 		frontend.topFive();

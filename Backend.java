@@ -193,9 +193,6 @@ public class Backend implements BackendInterface {
 
 		}
 
-
-
-
 		// determine the amount of songs in the fast range
 		int iterations = 5;
 		if(songs.size() < 5) iterations = songs.size(); 
