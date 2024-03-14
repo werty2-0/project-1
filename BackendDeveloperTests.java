@@ -205,8 +205,9 @@ public class BackendDeveloperTests {
 		Assertions.assertTrue(output.contains("7 songs found between 87 - 90:\nThere's Nothing Holdin' Me Back\nStrip That Down (feat. Quavo)\nTreasure\nSpark The Fire\nWorth It\nTalk (feat. Disclosure)\nDangerous"));
 	}
 
-	
-
+	/**
+	 * This testor method tests the frontend's output when a call to top five is called without previously reading the song.csv file 
+	 */	
 	@Test
 	public void partnerTestTopFiveNoFile(){
 
@@ -223,9 +224,11 @@ public class BackendDeveloperTests {
 
 		// make sure output contains correct error message pertaining to the invalid input entered
 		Assertions.assertTrue(output.contains("There exists no file"));
-		
 	}
 
+	/**
+	 * This testor method tests the frontend's output when a call to top five is called after reading the songs.csv file and creating a range.
+	 */
 	@Test
 	public void partnerTestTopFive(){
 
@@ -244,8 +247,5 @@ public class BackendDeveloperTests {
 
 		// make sure frontned outputs corect output retrieved from the backend 
 		Assertions.assertTrue(output.contains("Top Five songs found between 87 - 90\n122: There's Nothing Holdin' Me Back\n116: Treasure\n120: Spark The Fire\n136: Talk (feat. Disclosure)\n109: Dangerous"));
-
-
 	}
-
 }	
