@@ -1,9 +1,10 @@
 
-runBDTests: Backend.java Song.java BackendDeveloperTests.java ISCPlaceholder.java
+runBDTests: Backend.java Song.java BackendDeveloperTests.java ISCPlaceholder.java BackendPlaceholderPartnerTests.java
 	javac -cp .:../junit5.jar Backend.java
 	javac -cp .:../junit5.jar Song.java
 	javac -cp .:../junit5.jar BackendDeveloperTests.java
-	javac -cp .:../junit5.jar ISCPlaceholder.java	
+	javac -cp .:../junit5.jar ISCPlaceholder.java
+	javac -cp .:../junit5.jar BackendPlaceholderPartnerTests.java
 	java -jar ../junit5.jar -cp . -c BackendDeveloperTests
 
 runFDTests: Frontend.class compileFDTest
@@ -16,7 +17,7 @@ compileFDTest: FrontendDeveloperTests.java
 	javac -cp ../junit5.jar:. FrontendDeveloperTests.java
 
 runApp: App.java
-	javac App.java
+	javac -cp .:../junit5.jar App.java
 	java App
 
 clean: 

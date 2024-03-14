@@ -214,7 +214,7 @@ public class BackendDeveloperTests {
                 String input = "";
                 TextUITester textUI = new TextUITester(input);
                 Scanner scanner = new Scanner(System.in);
-                FrontendInterface frontend = new Frontend(scanner, new BackendPlaceholder(null));
+                FrontendInterface frontend = new Frontend(scanner, new BackendPlaceholderPartnerTests(null));
 
 		// get output for the topFive method call on the frontend before reading the songs file
 		frontend.topFive();	
@@ -233,7 +233,7 @@ public class BackendDeveloperTests {
 		String input = "song.csv\n87 - 90";
                 TextUITester textUI = new TextUITester(input);
                 Scanner scanner = new Scanner(System.in);
-                FrontendInterface frontend = new Frontend(scanner, new BackendPlaceholder(null));
+                FrontendInterface frontend = new Frontend(scanner, new BackendPlaceholderPartnerTests(null));
 
 		// make a call to TopFive on the frontend after after the songs file is read and a range is created. Should produce valid output
 		frontend.readFile();
@@ -243,7 +243,7 @@ public class BackendDeveloperTests {
 		scanner.close();
 
 		// make sure frontned outputs corect output retrieved from the backend 
-		Assertions.assertTrue(output.contains("Top Five songs found between 87 - 90\n97: Hey, Soul Sister\n87: Love The Way You Lie"));
+		Assertions.assertTrue(output.contains("Top Five songs found between 87 - 90\n122: There's Nothing Holdin' Me Back\n116: Treasure\n120: Spark The Fire\n136: Talk (feat. Disclosure)\n109: Dangerous"));
 
 
 	}

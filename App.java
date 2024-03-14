@@ -8,7 +8,7 @@ public class App {
 	IterableSortedCollection<SongInterface> tree = new IterableRedBlackTree<>(); 
 	BackendInterface backend = new Backend(tree);
 	Scanner in = new Scanner(System.in);
-	FrontendInterface frontend = new Frontend(in,backend);
+	FrontendInterface frontend = new Frontend(in, backend);
 
 	System.out.println("Welcome to iSongify");
 	System.out.println("===================");
